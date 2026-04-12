@@ -122,6 +122,6 @@ npm run dev
 
 ---
 
-<p align="center">Built with ❤️ for a healthier, decentralized future.</p>
+<p align="center">Built with ❤️ for a healthier, decentralized future. Your Data, Your Governance</p>
 
 
