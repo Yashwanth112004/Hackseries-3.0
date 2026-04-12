@@ -1,45 +1,127 @@
-# ojasraksha
+![Ojasraksha Banner](docs/assets/banner.png)
 
-This starter full stack project has been generated using AlgoKit. See below for default getting started instructions.
+<div align="center">
+  <img src="docs/assets/logo.png" width="150" height="150" alt="Ojasraksha Logo">
+  <h1>Ojasraksha</h1>
+  <p><strong>Decentralized, DPDP-Compliant Healthcare Management System</strong></p>
+  <p>
+    <img src="https://img.shields.io/badge/Blockchain-Algorand-000000?style=for-the-badge&logo=algorand&logoColor=white" alt="Algorand">
+    <img src="https://img.shields.io/badge/Frontend-React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
+    <img src="https://img.shields.io/badge/Compliance-DPDP-green?style=for-the-badge" alt="DPDP">
+    <img src="https://img.shields.io/badge/Storage-IPFS-65C2CB?style=for-the-badge&logo=ipfs&logoColor=white" alt="IPFS">
+  </p>
+</div>
 
-## Setup
+---
 
-### Initial setup
-1. Clone this repository to your local machine.
-2. Ensure [Docker](https://www.docker.com/) is installed and operational. Then, install `AlgoKit` following this [guide](https://github.com/algorandfoundation/algokit-cli#install).
-3. Run `algokit project bootstrap all` in the project directory. This command sets up your environment by installing necessary dependencies, setting up a Python virtual environment, and preparing your `.env` file.
-4. In the case of a smart contract project, execute `algokit generate env-file -a target_network localnet` from the `ojasraksha-contracts` directory to create a `.env.localnet` file with default configuration for `localnet`.
-5. To build your project, execute `algokit project run build`. This compiles your project and prepares it for running.
-6. For project-specific instructions, refer to the READMEs of the child projects:
-   - Smart Contracts: [ojasraksha-contracts](projects/ojasraksha-contracts/README.md)
-   - Frontend Application: [ojasraksha-frontend](projects/ojasraksha-frontend/README.md)
+## 🌟 Overview
 
-> This project is structured as a monorepo, refer to the [documentation](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/project/run.md) to learn more about custom command orchestration via `algokit project run`.
+**Ojasraksha** (vitality protection) is a next-generation healthcare platform designed to empower patients with full control over their medical data while ensuring strict compliance with India's **Digital Personal Data Protection (DPDP) Act**. 
 
-### Subsequently
+Built on the **Algorand Blockchain**, Ojasraksha provides immutable audit trails, secure decentralized storage via **IPFS**, and a robust Role-Based Access Control (RBAC) system to bridge the gap between patient privacy and healthcare efficiency.
 
-1. If you update to the latest source code and there are new dependencies, you will need to run `algokit project bootstrap all` again.
-2. Follow step 3 above.
+## ✨ Implemented Features
 
-## Tools
+### 🔐 Multi-Role Ecosystem
+Ojasraksha features 8 specialized dashboards tailored to the healthcare lifecycle:
+- **Patient Portal**: Full ownership of health records, consent management, and unified health profile.
+- **Doctor Dashboard**: Secure patient history access (consent-based) and on-chain prescription issuance.
+- **Hospital Portal**: Facility management, staff registration, and role assignment.
+- **Lab Dashboard**: End-to-end secure file lifecycle—encrypting results at source and anchoring to Alogrand.
+- **Pharmacy Dashboard**: Real-time prescription queue for efficient medication fulfillment.
+- **Insurance Portal**: Transparent claim verification and policy management based on verified records.
+- **Auditor Dashboard**: Independent oversight through immutable on-chain audit logs.
+- **Admin Dashboard**: System-level configuration and high-level health network monitoring.
 
-This project makes use of Python and React to build Algorand smart contracts and to provide a base project configuration to develop frontends for your Algorand dApps and interactions with smart contracts. The following tools are in use:
+### 🛡️ Core Processes & Innovations
+- **Auto-Funding Mechanism**: New users are automatically funded with 3 ALGO to ensure immediate usability on the blockchain.
+- **Secure File Lifecycle**: Sensitive medical files (PDFs/Images) are encrypted using **AES-256-GCM** before being uploaded to IPFS.
+- **Immutable Audit Trails**: Every data access event is logged on-chain, ensuring 100% transparency for Data Fiduciaries.
+- **Pera Wallet Integration**: Stabilized wallet connections with custom polyfills for a seamless user experience.
 
-- Algorand, AlgoKit, and AlgoKit Utils
-- Python dependencies including Poetry, Black, Ruff or Flake8, mypy, pytest, and pip-audit
-- React and related dependencies including AlgoKit Utils, Tailwind CSS, daisyUI, use-wallet, npm, jest, playwright, Prettier, ESLint, and Github Actions workflows for build validation
+## 🏗️ Technical Architecture
 
-### VS Code
+```mermaid
+graph TD
+    User((User)) -->|Connect Wallet| Pera[Pera/Defly Wallet]
+    User -->|React App| Frontend[Vite + TypeScript]
+    
+    subgraph "Storage & Security"
+        Frontend -->|AES-256-GCM| Encrypt[Encryption Module]
+        Encrypt -->|Upload| IPFS[IPFS Storage]
+    end
+    
+    subgraph "Blockchain (Algorand)"
+        Frontend -->|SDK| Contracts[Smart Contracts]
+        Contracts -->|Manage| RBAC[Healthcare RBAC]
+        Contracts -->|Store| Records[Medical Record Metadata]
+        Contracts -->|Log| Audit[Audit Logs]
+    end
+    
+    IPFS -->|CID Link| Records
+    RBAC -->|Authorize| Frontend
+```
 
-It has also been configured to have a productive dev experience out of the box in [VS Code](https://code.visualstudio.com/), see the [backend .vscode](./backend/.vscode) and [frontend .vscode](./frontend/.vscode) folders for more details.
+## 🛠️ Tech Stack & Requirements
 
-## Integrating with smart contracts and application clients
+### Tech Stack
+- **Blockchain**: Algorand (Python/AlgoKit/TEAL)
+- **Frontend**: React 18, TypeScript, Tailwind CSS, daisyUI, Framer Motion
+- **Wallet**: Pera Wallet, Defly, Exodus (via @txnlab/use-wallet)
+- **Storage**: IPFS
+- **Encryption**: Crypto Web API (AES-256-GCM)
 
-Refer to the [ojasraksha-contracts](projects/ojasraksha-contracts/README.md) folder for overview of working with smart contracts, [projects/ojasraksha-frontend](projects/ojasraksha-frontend/README.md) for overview of the React project and the [projects/ojasraksha-frontend/contracts](projects/ojasraksha-frontend/src/contracts/README.md) folder for README on adding new smart contracts from backend as application clients on your frontend. The templates provided in these folders will help you get started.
-When you compile and generate smart contract artifacts, your frontend component will automatically generate typescript application clients from smart contract artifacts and move them to `frontend/src/contracts` folder, see [`generate:app-clients` in package.json](projects/ojasraksha-frontend/package.json). Afterwards, you are free to import and use them in your frontend application.
+### Prerequisites
+- **Node.js**: v20.0 or higher
+- **AlgoKit**: Latest version ([Installation Guide](https://github.com/algorandfoundation/algokit-cli#install))
+- **Docker**: Required for running LocalNet
+- **Python**: v3.12 or higher (for contract development)
 
-The frontend starter also provides an example of interactions with your HelloWorldClient in [`AppCalls.tsx`](projects/ojasraksha-frontend/src/components/AppCalls.tsx) component by default.
+## 🚀 Getting Started
 
-## Next Steps
+### 1. Repository Setup
+```bash
+git clone https://github.com/Yashwanth112004/Ojasraksha.git
+cd ojasraksha
+```
 
-You can take this project and customize it to build your own decentralized applications on Algorand. Make sure to understand how to use AlgoKit and how to write smart contracts for Algorand before you start.
+### 2. Infrastructure Setup (LocalNet)
+Start the Algorand LocalNet environment:
+```bash
+algokit localnet start
+```
+
+### 3. Smart Contract Deployment
+```bash
+cd projects/ojasraksha-contracts
+algokit project run build # Compiles Python to TEAL
+algokit project deploy localnet # Deploys contracts to local node
+```
+
+### 4. Frontend Configuration
+Ensure you have the required `.env` variables. Copy the template:
+```bash
+cd ../ojasraksha-frontend
+cp .env.template .env
+```
+Update `.env` with your IPFS credentials if using a remote provider.
+
+### 5. Launch the Application
+```bash
+npm install
+npm run dev
+```
+
+## 🌍 Project Structure
+
+| Path | Description |
+| --- | --- |
+| `projects/ojasraksha-contracts` | Python-based smart contracts for RBAC and Records. |
+| `projects/ojasraksha-frontend` | React frontend with role-specific dashboards. |
+| `docs` | Architectural diagrams and project assets. |
+
+---
+
+<p align="center">Built with ❤️ for a healthier, decentralized future.</p>
+
+
