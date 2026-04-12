@@ -1,7 +1,7 @@
-![Ojasraksha Banner](docs/assets/banner.png)
+![Ojasraksha Banner](banner.png)
 
 <div align="center">
-  <img src="docs/assets/logo.png" width="150" height="150" alt="Ojasraksha Logo">
+  <img src="logo.png" width="150" height="150" alt="Ojasraksha Logo">
   <h1>Ojasraksha</h1>
   <p><strong>Decentralized, DPDP-Compliant Healthcare Management System</strong></p>
   <p>
