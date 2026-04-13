@@ -1,5 +1,3 @@
-![Ojasraksha Banner](banner.png)
-
 <div align="center">
   <img src="final_logo.jpeg" width="150" height="150" alt="Ojasraksha Logo">
   <h1>Ojasraksha</h1>
